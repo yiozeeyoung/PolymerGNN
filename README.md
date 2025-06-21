@@ -51,7 +51,43 @@ polymerlearn
 
 ## Setting up the Environment
 
-We recommend using Python >3.8 to run this code and setting up a virtual environment into which the packages will be installed. If you use Anaconda, you can set up all the requirements from the yml file:
+### Development Environment
+**This fork has been developed and tested on macOS with Python 3.10+**. The requirements.txt file is optimized for macOS systems.
+
+### Platform-Specific Installation
+
+#### For macOS (Recommended):
+1. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+2. Install requirements:
+```bash
+pip install -r requirements.txt
+```
+
+3. Install the polymerlearn package:
+```bash
+pip install -e .
+```
+
+#### For Windows:
+⚠️ **Important**: Windows users need to install PyTorch separately before installing other requirements, as the PyTorch installation may differ based on your system configuration (CPU vs GPU, CUDA version, etc.).
+
+1. First install PyTorch following the official instructions at [pytorch.org](https://pytorch.org/)
+2. Then install PyTorch Geometric following [PyG installation guide](https://pytorch-geometric.readthedocs.io/en/latest/install/installation.html)
+3. Finally install remaining requirements:
+```bash
+pip install -r requirements.txt
+```
+
+#### For Linux:
+Similar to Windows, you may need to install PyTorch and PyTorch Geometric separately based on your system configuration.
+
+### Legacy Installation (Original Method)
+If you use Anaconda, you can set up all the requirements from the yml file:
 ```
 conda env create --name your_env_name --file polymergnn_env.yml
 ```
@@ -59,16 +95,13 @@ This sets up all of the packages, and Owen has verified that it can be used on t
 
 For more general setup instructions for external packages, please reference [conda-instructions.md](https://github.com/owencqueen/PolymerGNN/blob/main/conda-instructions.md).
 
-To install the polymerlearn package, use the following command:
-```
-cd /path/to/PolymerGNN
-pip install -e .
-```
-If using conda, ensure you have `pip` installed into the conda environment (`conda install pip`).
+### Requirements
+- Python 3.8+ (tested with Python 3.10)
+- PyTorch 2.0+
+- PyTorch Geometric 2.4+
+- See `requirements.txt` for complete list of dependencies
 
-**note**: As of Mar 24, DONT USE the requirements.txt file. Will update this later. Leaving the below bit for use later:
-
-This should also install all dependencies for the package. Most dependencies are not strict, but ensure that you're running [PyG](https://pytorch-geometric.readthedocs.io/en/latest/) >2.0.0. Please see `requirements.txt` for a list of Python packages required to run our code.
+**note**: The requirements.txt file has been updated and is now safe to use (as of this fork).
 
 ## Relevant files
 To view a general API overview of the package, see the notebooks in the `demo` directory. These include demo's on predicting IV, Tg, and running the joint model. Examples of both cross validation and regular training are shown. 
