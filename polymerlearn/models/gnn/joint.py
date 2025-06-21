@@ -7,6 +7,10 @@ class PolymerGNN_Joint(torch.nn.Module):
         super(PolymerGNN_Joint, self).__init__()
         self.hidden_channels = hidden_channels
 
+# 创建包装函数
+        def sag_pool_wrapper(x, edge_index, batch):
+            return SAGPooling(hidden_channels)(x, edge_index, batch=batch)
+
         self.Asage = Sequential('x, edge_index, batch', [
             (GATConv(input_feat, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
             BatchNorm(hidden_channels, track_running_stats=False),
@@ -14,7 +18,7 @@ class PolymerGNN_Joint(torch.nn.Module):
             (SAGEConv(hidden_channels, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
             BatchNorm(hidden_channels, track_running_stats=False),
             torch.nn.PReLU(),
-            (SAGPooling(hidden_channels), 'x, edge_index, batch=batch -> x'),
+            (sag_pool_wrapper, 'x, edge_index, batch=batch -> x'),
         ])
 
         self.Gsage = Sequential('x, edge_index, batch', [
@@ -24,7 +28,7 @@ class PolymerGNN_Joint(torch.nn.Module):
             (SAGEConv(hidden_channels, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
             BatchNorm(hidden_channels, track_running_stats=False),
             torch.nn.PReLU(),
-            (SAGPooling(hidden_channels), 'x, edge_index, batch=batch -> x'),
+            (sag_pool_wrapper, 'x, edge_index, batch=batch -> x'),
         ])
 
         self.fc1 = torch.nn.Linear(hidden_channels * 2 + num_additional, hidden_channels)
