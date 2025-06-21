@@ -1,6 +1,25 @@
 # PolymerGNN
 <img src="https://github.com/owencqueen/PolymerGNN/blob/main/img/whole_arch.jpg" data-canonical-src="https://github.com/owencqueen/PolymerGNN/blob/main/img/whole_arch.jpg" width="700" height="700" />
-Graph neural networks for polymer property prediction. <a href='https://www.nature.com/articles/s41524-023-01034-3/'>Paper</a>
+
+## About This Repository
+
+This repository contains Graph Neural Networks (GNNs) for polymer property prediction, originally developed by Queen et al. The models are designed to predict various polymer properties including glass transition temperature (Tg) and intrinsic viscosity (IV) using molecular graph representations. The work is published in Nature npj Computational Materials: <a href='https://www.nature.com/articles/s41524-023-01034-3/'>Paper</a>
+
+### Key Features:
+- **Multi-task learning**: Joint prediction of multiple polymer properties
+- **Graph neural networks**: Leverages molecular structure through graph representations
+- **Explainability tools**: Integrated tools for model interpretation
+- **Cross-validation support**: Robust model evaluation capabilities
+
+## Modifications in This Fork
+
+This fork includes the following updates to ensure compatibility with current PyTorch and PyTorch Geometric versions:
+
+- **Fixed deprecated syntax in PolymerGNN_Tg model**: Updated outdated PyTorch Geometric operations to ensure the model runs correctly with modern library versions
+- **Syntax updates**: Resolved compatibility issues that prevented the original model from running
+- **Maintained backward compatibility**: All original functionality preserved while fixing runtime issues
+
+The core algorithms and model architectures remain unchanged from the original implementation.
 
 ## PolymerLearn Package Structure
 `polymerlearn` is the main component of the repository. This contains all of the driver code for `PolymerGNN`, explainability tools, and utilities for proprocessing data in the format provided.
